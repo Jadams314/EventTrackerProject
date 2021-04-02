@@ -20,8 +20,7 @@ public class RideServiceImpl implements RideService {
 	
 	@Override
 	public List<Rides> allRides() {
-		// TODO Auto-generated method stub
-		return null;
+		return repo.findAll();
 	}
 
 	@Override
