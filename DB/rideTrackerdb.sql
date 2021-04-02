@@ -16,13 +16,18 @@ CREATE SCHEMA IF NOT EXISTS `rideTrackerdb` DEFAULT CHARACTER SET utf8 ;
 USE `rideTrackerdb` ;
 
 -- -----------------------------------------------------
--- Table `Rides`
+-- Table `Ride`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Rides` ;
+DROP TABLE IF EXISTS `Ride` ;
 
-CREATE TABLE IF NOT EXISTS `Rides` (
+CREATE TABLE IF NOT EXISTS `Ride` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `miles` INT NULL,
+  `title` VARCHAR(45) NOT NULL,
+  `Description` VARCHAR(10000) NOT NULL,
+  `miles` INT NOT NULL,
+  `bike_used` VARCHAR(45) NULL,
+  `time_hours` INT NULL,
+  `time_minutes` INT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -38,11 +43,12 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 -- -----------------------------------------------------
--- Data for table `Rides`
+-- Data for table `Ride`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `rideTrackerdb`;
-INSERT INTO `Rides` (`id`, `miles`) VALUES (1, 100);
+INSERT INTO `Ride` (`id`, `title`, `Description`, `miles`, `bike_used`, `time_hours`, `time_minutes`) VALUES (1, 'MA to TX', 'Moved to tx and it was the only way to get my bike there. Best ride of my life', 1972, '2011 FatBoy', 84, 24);
+INSERT INTO `Ride` (`id`, `title`, `Description`, `miles`, `bike_used`, `time_hours`, `time_minutes`) VALUES (3, 'Tail of the Dragon', '318 curves in just 11 miles! Not for beginner riders', 11, '2011 FatBoy', 0, 30);
 
 COMMIT;
 
