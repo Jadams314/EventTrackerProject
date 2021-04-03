@@ -2,9 +2,9 @@ package com.skilldistillery.rideTracker.services;
 
 import java.util.List;
 
-import com.skilldistillery.rideTracker.entities.Rides;
+import com.skilldistillery.rideTracker.entities.Ride;
 
 public interface RideService {
-	List<Rides> allRides();
-	Rides findById(int rideId);
+	List<Ride> allRides();
+	Ride findById(int rideId);
 }

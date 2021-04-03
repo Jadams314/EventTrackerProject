@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Rides {
+public class Ride {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,7 +14,7 @@ public class Rides {
 	
 	private int miles;
 
-	public Rides() {
+	public Ride() {
 		super();
 	}
 
@@ -50,7 +50,7 @@ public class Rides {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Rides other = (Rides) obj;
+		Ride other = (Ride) obj;
 		if (id != other.id)
 			return false;
 		return true;

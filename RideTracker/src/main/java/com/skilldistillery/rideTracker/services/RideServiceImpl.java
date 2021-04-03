@@ -7,7 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.skilldistillery.rideTracker.entities.Rides;
+import com.skilldistillery.rideTracker.entities.Ride;
 import com.skilldistillery.rideTracker.repositories.RideRepository;
 
 @Service
@@ -19,12 +19,12 @@ public class RideServiceImpl implements RideService {
 	
 	
 	@Override
-	public List<Rides> allRides() {
+	public List<Ride> allRides() {
 		return repo.findAll();
 	}
 
 	@Override
-	public Rides findById(int rideId) {
+	public Ride findById(int rideId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

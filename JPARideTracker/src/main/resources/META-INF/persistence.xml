@@ -10,7 +10,7 @@
 
 <!-- entities  -->
 
-<class>com.skilldistillery.rideTracker.entities.Rides</class>
+<class>com.skilldistillery.rideTracker.entities.Ride</class>
 
 <!-- entities  -->
 

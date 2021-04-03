@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.skilldistillery.rideTracker.entities.Rides;
+import com.skilldistillery.rideTracker.entities.Ride;
 import com.skilldistillery.rideTracker.services.RideService;
 
 @RequestMapping("api")
@@ -22,7 +22,7 @@ public class RideController {
 		return "pong";
 	}
 	@GetMapping("rides")
-	public List<Rides> getAllRides(){
+	public List<Ride> getAllRides(){
 		return serv.allRides();
 	}
 }

@@ -12,11 +12,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class RidesTest {
+class RideTest {
 	
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Rides ride;
+	private Ride ride;
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -31,7 +31,7 @@ class RidesTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		ride = em.find(Rides.class, 1);
+		ride = em.find(Ride.class, 1);
 	}
 
 	@AfterEach
@@ -43,7 +43,7 @@ class RidesTest {
 	@Test
 	void test() {
 		assertNotNull(ride);
-		assertEquals(100, ride.getMiles());
+		assertEquals(1972, ride.getMiles());
 	}
 
 }
