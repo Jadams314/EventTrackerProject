@@ -50,6 +50,54 @@ public class Ride {
 		this.miles = miles;
 	}
 
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getBikeUsed() {
+		return bikeUsed;
+	}
+
+	public void setBikeUsed(String bikeUsed) {
+		this.bikeUsed = bikeUsed;
+	}
+
+	public int getTimeHours() {
+		return timeHours;
+	}
+
+	public void setTimeHours(int timeHours) {
+		this.timeHours = timeHours;
+	}
+
+	public int getTimeMinutes() {
+		return timeMinutes;
+	}
+
+	public void setTimeMinutes(int timeMinutes) {
+		this.timeMinutes = timeMinutes;
+	}
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -75,10 +123,22 @@ public class Ride {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Rides [id=");
+		builder.append("Ride [id=");
 		builder.append(id);
+		builder.append(", title=");
+		builder.append(title);
+		builder.append(", description=");
+		builder.append(description);
 		builder.append(", miles=");
 		builder.append(miles);
+		builder.append(", bikeUsed=");
+		builder.append(bikeUsed);
+		builder.append(", timeHours=");
+		builder.append(timeHours);
+		builder.append(", timeMinutes=");
+		builder.append(timeMinutes);
+		builder.append(", deleted=");
+		builder.append(deleted);
 		builder.append("]");
 		return builder.toString();
 	}
