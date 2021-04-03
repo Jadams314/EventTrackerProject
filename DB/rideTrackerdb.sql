@@ -23,12 +23,12 @@ DROP TABLE IF EXISTS `Ride` ;
 CREATE TABLE IF NOT EXISTS `Ride` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(45) NOT NULL,
-  `Description` VARCHAR(10000) NOT NULL,
+  `description` VARCHAR(10000) NOT NULL,
   `miles` INT NOT NULL,
   `bike_used` VARCHAR(45) NULL,
   `time_hours` INT NULL,
   `time_minutes` INT NULL,
-  `is_deleted` TINYINT NULL,
+  `deleted` TINYINT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -48,10 +48,10 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `rideTrackerdb`;
-INSERT INTO `Ride` (`id`, `title`, `Description`, `miles`, `bike_used`, `time_hours`, `time_minutes`, `is_deleted`) VALUES (1, 'MA to TX', 'Moved to tx and it was the only way to get my bike there. Best ride of my life', 1972, '2011 FatBoy', 84, 24, 0);
-INSERT INTO `Ride` (`id`, `title`, `Description`, `miles`, `bike_used`, `time_hours`, `time_minutes`, `is_deleted`) VALUES (0, 'Tail of the Dragon', '318 curves in just 11 miles! Not for beginner riders', 11, '2011 FatBoy', 0, 30, 0);
-INSERT INTO `Ride` (`id`, `title`, `Description`, `miles`, `bike_used`, `time_hours`, `time_minutes`, `is_deleted`) VALUES (3, 'Daytona to Charleston', 'This was just a boring highway ride ', 327, '2012 Sportster 72', 5, 2, 0);
-INSERT INTO `Ride` (`id`, `title`, `Description`, `miles`, `bike_used`, `time_hours`, `time_minutes`, `is_deleted`) VALUES (4, 'Daytona to Miami', 'Nice Ride down the FLorida coast with the ocean by your side', 200, '2012 Sportster 72', 3, 56, 0);
+INSERT INTO `Ride` (`id`, `title`, `description`, `miles`, `bike_used`, `time_hours`, `time_minutes`, `deleted`) VALUES (1, 'MA to TX', 'Moved to tx and it was the only way to get my bike there. Best ride of my life', 1972, '2011 FatBoy', 84, 24, 0);
+INSERT INTO `Ride` (`id`, `title`, `description`, `miles`, `bike_used`, `time_hours`, `time_minutes`, `deleted`) VALUES (0, 'Tail of the Dragon', '318 curves in just 11 miles! Not for beginner riders', 11, '2011 FatBoy', 0, 30, 0);
+INSERT INTO `Ride` (`id`, `title`, `description`, `miles`, `bike_used`, `time_hours`, `time_minutes`, `deleted`) VALUES (3, 'Daytona to Charleston', 'This was just a boring highway ride ', 327, '2012 Sportster 72', 5, 2, 0);
+INSERT INTO `Ride` (`id`, `title`, `description`, `miles`, `bike_used`, `time_hours`, `time_minutes`, `deleted`) VALUES (4, 'Daytona to Miami', 'Nice Ride down the FLorida coast with the ocean by your side', 200, '2012 Sportster 72', 3, 56, 0);
 
 COMMIT;
 

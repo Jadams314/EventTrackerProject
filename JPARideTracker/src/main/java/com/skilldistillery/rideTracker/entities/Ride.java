@@ -1,5 +1,6 @@
 package com.skilldistillery.rideTracker.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,7 +13,22 @@ public class Ride {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	private String title;
+	
+	private String description;
+	
 	private int miles;
+	
+	@Column(name = "bike_used")
+	private String bikeUsed;
+	
+	@Column(name = "time_hours")
+	private int timeHours;
+	
+	@Column(name = "time_minutes")
+	private int timeMinutes;
+	
+	private boolean deleted;
 
 	public Ride() {
 		super();
