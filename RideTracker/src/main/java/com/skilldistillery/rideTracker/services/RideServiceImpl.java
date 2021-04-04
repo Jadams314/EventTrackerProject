@@ -1,5 +1,6 @@
 package com.skilldistillery.rideTracker.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -20,13 +21,49 @@ public class RideServiceImpl implements RideService {
 	
 	@Override
 	public List<Ride> allRides() {
-		return repo.findAll();
+		List<Ride> allRides = repo.findAll();
+		List<Ride> filtered = new ArrayList<>();
+		for (Ride ride : allRides) {
+			if (ride.isDeleted()== false) {
+				filtered.add(ride);
+			}
+		}
+		return filtered;
 	}
 
 	@Override
 	public Ride findById(int rideId) {
-		// TODO Auto-generated method stub
+		Ride ride = repo.findById(rideId).get();
+		return ride;
+	}
+
+	@Override
+	public Ride createRide(Ride ride) {
+		repo.saveAndFlush(ride);
+		return ride;
+	}
+
+	@Override
+	public Ride updateRide(Ride ride, int id) {
+		Ride oldRide = findById(id);
+		if (oldRide != null) {
+			oldRide.setBikeUsed(ride.getBikeUsed());
+			oldRide.setDescription(ride.getDescription());
+			oldRide.setMiles(ride.getMiles());
+			oldRide.setTimeHours(ride.getTimeHours());
+			oldRide.setTimeMinutes(ride.getTimeMinutes());
+			oldRide.setTitle(ride.getTitle());
+			repo.saveAndFlush(oldRide);
+			return oldRide;
+		}
 		return null;
+	}
+
+	@Override
+	public void deleteRide(int id) {
+		Ride ride = findById(id);
+		ride.setDeleted(true);
+		
 	}
 
 }
