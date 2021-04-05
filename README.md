@@ -11,6 +11,7 @@ and delete their post.
 * Spring boot
 * RESTful
 * JSON
+* JPA
 * MySQL
 * Tomcat
 * AWS EC2
