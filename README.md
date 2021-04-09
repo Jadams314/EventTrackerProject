@@ -23,7 +23,7 @@ and delete their post.
 HTTP Method | Resource URI | Request Body | Returns |
 |-------------|--------------|--------------|---------|
 | GET         | `api/rides` |              | a list of all posted rides|
-| GET         | 'api/rides/{id}'|           | a ride post related to a specific id|
-| POST        | 'api/rides' | JSON form of post | the post sent by the user|
-| POST        | 'api/rides/{id}'| JSON form of post | an updated version of a post |
-| Delete      | 'api/rides/{id}'|            | deletes a post by id|
+| GET         | `api/rides/{id}`|           | a ride post related to a specific id|
+| POST        | `api/rides` | JSON form of post | the post sent by the user|
+| POST        | `api/rides/{id}`| JSON form of post | an updated version of a post |
+| Delete      | `api/rides/{id}`|            | deletes a post by id|
