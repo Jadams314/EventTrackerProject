@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `Ride` (
 ENGINE = InnoDB;
 
 SET SQL_MODE = '';
-DROP USER IF EXISTS rideuser@localhost;
+--DROP USER IF EXISTS rideuser@localhost;
 SET SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 CREATE USER 'rideuser'@'localhost' IDENTIFIED BY 'rideuser';
 
@@ -54,4 +54,3 @@ INSERT INTO `Ride` (`id`, `title`, `description`, `miles`, `bike_used`, `time_ho
 INSERT INTO `Ride` (`id`, `title`, `description`, `miles`, `bike_used`, `time_hours`, `time_minutes`, `deleted`) VALUES (4, 'Daytona to Miami', 'Nice Ride down the FLorida coast with the ocean by your side', 200, '2012 Sportster 72', 3, 56, 0);
 
 COMMIT;
-
