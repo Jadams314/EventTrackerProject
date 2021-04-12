@@ -3,6 +3,11 @@ window.addEventListener('load', function (evt) {
     init();
 });
 
+
+let showDetails = function(id){
+    let div = document.getElementById('rideDetails');
+
+}
 function init() {
     let xhr = new XMLHttpRequest();
     xhr.open('GET', 'api/rides');
@@ -10,7 +15,7 @@ function init() {
         if (xhr.readyState === 4){
             if (xhr.status === 200){
                 let rides = JSON.parse(xhr.responseText);
-                console.log(rides);
+                //formSearch();
                 displayRides(rides);
 
             }
@@ -33,30 +38,40 @@ function displayErrors() {
 function displayRides(rides) {
     let div = document.getElementById('rideTable');
     let table = document.createElement('table');
+        table.setAttribute("id", 'tbl');
         table.setAttribute('border', "2");
         div.appendChild(table);
     let thead = document.createElement('thead');
         let theadrow = document.createElement('tr');
         // populates the head of the table with properties of the object
-        for (var p in rides[1]){
-            if (p !== rides[1].deleted){
+        for (var p in rides[0]){
                 var th = document.createElement('th');
                 th.textContent = p
                 theadrow.appendChild(th);
-                console.log(rides[0].title);
-            }
+               // console.log(rides[0].title);
             
         }
-        console.log(rides.length);
     thead.appendChild(theadrow);
     table.appendChild(thead);
     
     let tbody = document.createElement('tbody');
     
    // make a row for each object in the list
-    
-        for (var i = 0; i < rides.length; i++){
-            let tr = document.createElement('tr');
+        
+        for (var i = 0; i < rides.length - 1; i++){
+            let tr = document.createElement('tr')
+            tr.setAttribute('id', rides[i].id);
+
+            tr.addEventListener('click', function(e){
+                e.preventDefault();
+                var id = tr.id;
+                if (!isNaN(id) && id > 0){
+                   
+                    rideDetails(id);
+                    console.log('row clicked');
+                    
+                }
+            })
             ////id
             let td1 = document.createElement('td');
             td1.textContent = rides[i].id;
@@ -78,9 +93,6 @@ function displayRides(rides) {
             //Time Minutes
             let td7 = document.createElement('td');
             td7.textContent = rides[i].timeMinutes;
-            //deleted
-            let td8 = document.createElement('td');
-            td8.textContent = rides[i].deleted
             tr.appendChild(td1);
             tr.appendChild(td2);
             tr.appendChild(td3);
@@ -88,7 +100,6 @@ function displayRides(rides) {
             tr.appendChild(td5);
             tr.appendChild(td6);
             tr.appendChild(td7);
-            tr.appendChild(td8);
             tbody.appendChild(tr);
         }
  
@@ -96,16 +107,159 @@ function displayRides(rides) {
     table.appendChild(tbody);
     div.appendChild(table);
     
-    
+    let br = document.createElement('br');
+    let btn3 = document.createElement('button');
+    btn3.setAttribute('id', "add");
+    btn3.innerHTML = "Add Ride";
+    div.appendChild(btn3);
 
-
-    // for (const ride of rides) {
-    //         let li = document.createElement('li');
-    //         li.textContent = ride.title + " " + ride.description;
-    //         ol.appendChild(li);
-    //     }
+    btn3.addEventListener('click', function(e){
+        e.preventDefault();
+            console.log('Add Clicked');
+           addRide();
+    })
 }
 
-function table(){
-    let table = document
+function addRide(){
+    let div = document.getElementById('formDiv');
+    let div2 = document.getElementById('rideTable');
+    let tbl = document.getElementById('tbl');
+    let btn2 = document.getElementById('add')
+    var br = document.createElement('br');
+    div2.removeChild(tbl);
+    div2.removeChild(btn2);
+
+
+
+        let form = document.createElement('form');
+            
+            // title
+            var input = document.createElement('input')
+                input.type = "text";
+                input.name = "title";
+                input.insertAdjacentText(input,"Title")
+                form.appendChild(input);
+                var br = document.createElement('br');
+                form.appendChild(br);
+            // description
+            var input = document.createElement('input')
+                input.type = "text";
+                input.name = "description";
+                form.appendChild(input);
+                var br = document.createElement('br');
+                form.appendChild(br);
+            // bikeUsed
+            var input = document.createElement('input')
+                input.type = "text";
+                input.name = "bikeUsed";
+                form.appendChild(input);
+                var br = document.createElement('br');
+                form.appendChild(br);
+            // miles
+            var input = document.createElement('input')
+                input.type = "number";
+                input.name = "miles";
+                form.appendChild(input);
+                var br = document.createElement('br');
+                form.appendChild(br);
+            // timeHours
+            var input = document.createElement('input')
+                input.type = "number";
+                input.name = "timeHours";
+                form.appendChild(input);
+                var br = document.createElement('br');
+                form.appendChild(br);
+            // timeMinutes
+            var input = document.createElement('input')
+                input.type = "number";
+                input.name = "timeMinutes";
+                form.appendChild(input);
+                var br = document.createElement('br');
+                form.appendChild(br);
+                
+                let btn3 = document.createElement('button');
+                    btn3.setAttribute('id', "submit");
+                    btn3.innerHTML = "submit";
+                    form.appendChild(btn3);
+
+                    btn3.addEventListener('click', function(e){
+                        e.preventDefault();
+                            console.log('Submit Clicked');
+                        //create();
+                    })
+
+
+            div.appendChild(form);
+        
+}
+
+function rideDetails(id){
+    let div = document.getElementById('rideDetails');
+    let div2 = document.getElementById('rideTable');
+        let tbl = document.getElementById('tbl')
+        div2.removeChild(tbl);
+    
+        div.textContent = '';
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', 'api/rides/'+ id);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4){
+            if (xhr.status === 200){
+                let ride = JSON.parse(xhr.responseText);
+                let h3 = document.createElement('h3');
+                h3.textContent = ride.title;
+                div.appendChild(h3);
+                let bq = document.createElement('p');
+                bq.textContent = ride.description;
+                div.appendChild(bq);
+                let ul = document.createElement('ul');
+
+                    let li3 = document.createElement('li');
+                    li3.textContent = 'Bike: ' + ride.bikeUsed;
+                    ul.appendChild(li3);
+
+                    let li1 = document.createElement('li');
+                    li1.textContent = 'Distance: ' + ride.miles + " Miles";
+                    ul.appendChild(li1);
+
+                    let li2 = document.createElement('li');
+                    li2.textContent = 'Time: ' + ride.timeHours + "." + ride.timeMinutes;
+                    ul.appendChild(li2);
+
+
+
+                div.appendChild(ul);
+                let br = document.createElement('br');
+                let btn = document.createElement('button');
+                btn.setAttribute('id', "btn");
+                btn.innerHTML = "Delete";
+                div.appendChild(btn);
+
+                let btn2 = document.createElement('button');
+                btn2.setAttribute('id', "updateBtn");
+                btn2.innerHTML = "Update";
+                div.appendChild(btn2);
+
+                btn2.addEventListener('click', function(e){
+                    e.preventDefault();
+                        console.log('Update clicked');
+                       // deleteRide(ride.id);
+                })
+
+
+                btn.addEventListener('click', function(e){
+                    e.preventDefault();
+                        console.log('Delete clicked');
+                       // deleteRide(ride.id);
+                })
+
+            }
+            else{
+                displayError('Error retrieving Rides: ' + xhr.status);
+                
+            }
+        }
+    }
+   xhr.send();
+    
 }

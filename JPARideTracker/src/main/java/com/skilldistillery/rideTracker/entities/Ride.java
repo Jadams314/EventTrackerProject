@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Ride {
 	
@@ -28,6 +30,7 @@ public class Ride {
 	@Column(name = "time_minutes")
 	private int timeMinutes;
 	
+	@JsonIgnore
 	private boolean deleted;
 
 	public Ride() {
