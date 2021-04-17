@@ -1,0 +1,75 @@
+<div class="container-fluid" *ngIf='!selected && rides'>
+  <h1>Logged Rides</h1>
+  <br>
+<table class="table table-striped table-hover" >
+  <thead>
+    <tr class="table-info">
+      <th scope="col">Id</th>
+      <th scope="col">Title</th>
+      <th scope="col">Miles</th>
+      <th scope="col">Bike Used</th>
+      <th scope="col">Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let ride of rides" (click)="displayRide(ride)">
+      <th scope="row">{{ride.id}}</th>
+      <td>{{ride.title}}</td>
+      <td>{{ride.miles}}</td>
+      <td>{{ride.bikeUsed}}</td>
+      <td>{{ride.timeHours}}.{{ride.timeMinutes}}</td>
+    </tr>
+  </tbody>
+</table>
+<button class="btn btn-success" (click)="newRideForm()">Add a Ride</button>
+</div>
+
+<div class="container-fluid" *ngIf='selected'>
+<h1>{{selected.title}}</h1>
+<br>
+<p>{{selected.description}}</p>
+<ul>
+  <li>{{selected.miles}}</li>
+  <li>{{selected.bikeUsed}}</li>
+  <li>{{selected.timeHours}}.{{selected.timeMinutes}}</li>
+</ul>
+<button class="btn btn-primary" (click)='loadRides()'>Go Back</button>
+<button class="btn btn-success">Update</button>
+<button class="btn btn-danger">Delete</button>
+</div>
+<div class="container" name = "addRide" *ngIf='!rides && !selected'>
+  <form>
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input type="text" class="form-control" name='title'[(ngModel)]='newRide.title'>
+    </div>
+
+     <div class="mb-3">
+      <label for="description" class="form-label">Description of your Ride</label>
+      <input type="text" class="form-control" name='description' [(ngModel)]='newRide.description' >
+    </div>
+
+    <div class="mb-3">
+      <label for="miles" class="form-label">How Many Miles</label>
+      <input type="number" class="form-control" name='miles' [(ngModel)]='newRide.miles' >
+    </div>
+
+    <div class="mb-3">
+      <label for="bikeUsed" class="form-label">Bike Used</label>
+      <input type="text" class="form-control" name='bikeUsed' [(ngModel)]='newRide.bikeUsed' >
+    </div>
+
+    <div class="mb-3">
+      <label for="timeHours" class="form-label">How Many Hours?</label>
+      <input type="number" class="form-control" name='timeHours' [(ngModel)]='newRide.timeHours' >
+    </div>
+
+    <div class="mb-3">
+      <label for="timeMinutes" class="form-label">How Many Minutes?</label>
+      <input type="number" class="form-control" name='timeMinutes' [(ngModel)]='newRide.timeMinutes' >
+    </div>
+
+    <button (click)="addRide(newRide)" type="submit" class="btn btn-primary">Submit</button>
+    <button (click)="loadRides()" type="submit" class="btn btn-danger">Cancel</button>
+  </form>
+</div>
