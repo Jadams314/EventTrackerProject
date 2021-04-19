@@ -33,9 +33,17 @@ export class RideService {
    .pipe(
      catchError((err: any) => {
        console.log(err);
-       return throwError('Failed to Create newTodo' + err);
+       return throwError('Failed to Create newRide' + err);
      })
    );
   }
-
+    updateRide(ride: Ride){
+        return this.http.put<Ride>(`${this.url}/${ride.id}`, ride)
+        .pipe(
+          catchError((err: any) => {
+            console.log(err);
+            return throwError('Failed to set Deleted to True' + err);
+          })
+        );
+    }
 }

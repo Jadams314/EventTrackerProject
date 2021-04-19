@@ -7,12 +7,14 @@ import { AppComponent } from './app.component';
 import { RideService } from './services/ride.service';
 import { RideListComponent } from './components/ride-list/ride-list.component';
 import { FormsModule } from '@angular/forms';
+import { DeletedPipe } from './pipes/deleted.pipe';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    RideListComponent
+    RideListComponent,
+    DeletedPipe
   ],
   imports: [
     BrowserModule,
@@ -21,7 +23,8 @@ import { FormsModule } from '@angular/forms';
     FormsModule
   ],
   providers: [
-    RideService
+    RideService,
+    DeletedPipe
   ],
   bootstrap: [AppComponent]
 })

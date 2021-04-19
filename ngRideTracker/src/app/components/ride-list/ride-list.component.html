@@ -1,3 +1,5 @@
+
+<!-- Start of The Ride List -->
 <div class="container-fluid" *ngIf='!selected && rides'>
   <h1>Logged Rides</h1>
   <br>
@@ -12,18 +14,21 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let ride of rides" (click)="displayRide(ride)">
-      <th scope="row">{{ride.id}}</th>
-      <td>{{ride.title}}</td>
-      <td>{{ride.miles}}</td>
-      <td>{{ride.bikeUsed}}</td>
-      <td>{{ride.timeHours}}.{{ride.timeMinutes}}</td>
+    <tr *ngFor="let ride of rides | deleted" (click)="displayRide(ride)">
+        <th scope="row">{{ride.id}}</th>
+        <td>{{ride.title}}</td>
+        <td>{{ride.miles}}</td>
+        <td>{{ride.bikeUsed}}</td>
+        <td>{{ride.timeHours}}.{{ride.timeMinutes}}</td>
+
+
     </tr>
   </tbody>
 </table>
 <button class="btn btn-success" (click)="newRideForm()">Add a Ride</button>
 </div>
 
+<!-- Start of Selected Ride -->
 <div class="container-fluid" *ngIf='selected'>
 <h1>{{selected.title}}</h1>
 <br>
@@ -34,42 +39,52 @@
   <li>{{selected.timeHours}}.{{selected.timeMinutes}}</li>
 </ul>
 <button class="btn btn-primary" (click)='loadRides()'>Go Back</button>
-<button class="btn btn-success">Update</button>
-<button class="btn btn-danger">Delete</button>
+<button (click)='update(selected)' class="btn btn-success">Update</button>
+<button (click)='destroy(selected)' class="btn btn-danger">Delete</button>
 </div>
-<div class="container" name = "addRide" *ngIf='!rides && !selected'>
+
+<!-- Start of add Ride Form -->
+<!-- When bool is bool is true inputs are filled with selected to populate the form for updates -->
+<div class="container" name = "addRide" *ngIf='!rides'>
   <form>
     <div class="mb-3">
       <label for="title" class="form-label">Title</label>
-      <input type="text" class="form-control" name='title'[(ngModel)]='newRide.title'>
+      <input *ngIf='!bool'  type="text" class="form-control" name='title'[(ngModel)]='newRide.title'>
+      <input *ngIf='bool' type="text" class="form-control" name='title'[(ngModel)]='selected.title'>
     </div>
 
      <div class="mb-3">
       <label for="description" class="form-label">Description of your Ride</label>
-      <input type="text" class="form-control" name='description' [(ngModel)]='newRide.description' >
+      <input *ngIf='!bool' type="text" class="form-control" name='description' [(ngModel)]='newRide.description' >
+      <input *ngIf='bool' type="text" class="form-control" name='description' [(ngModel)]='selected.description' >
     </div>
 
     <div class="mb-3">
       <label for="miles" class="form-label">How Many Miles</label>
-      <input type="number" class="form-control" name='miles' [(ngModel)]='newRide.miles' >
+      <input *ngIf='!bool' type="number" class="form-control" name='miles' [(ngModel)]='newRide.miles' >
+      <input *ngIf='bool' type="number" class="form-control" name='miles' [(ngModel)]='selected.miles' >
     </div>
 
     <div class="mb-3">
       <label for="bikeUsed" class="form-label">Bike Used</label>
-      <input type="text" class="form-control" name='bikeUsed' [(ngModel)]='newRide.bikeUsed' >
+      <input *ngIf='!bool' type="text" class="form-control" name='bikeUsed' [(ngModel)]='newRide.bikeUsed' >
+      <input *ngIf='bool' type="text" class="form-control" name='bikeUsed' [(ngModel)]='selected.bikeUsed' >
     </div>
 
     <div class="mb-3">
       <label for="timeHours" class="form-label">How Many Hours?</label>
-      <input type="number" class="form-control" name='timeHours' [(ngModel)]='newRide.timeHours' >
+      <input *ngIf='!bool' type="number" class="form-control" name='timeHours' [(ngModel)]='newRide.timeHours' >
+      <input *ngIf='bool' type="number" class="form-control" name='timeHours' [(ngModel)]='selected.timeHours' >
     </div>
 
     <div class="mb-3">
       <label for="timeMinutes" class="form-label">How Many Minutes?</label>
-      <input type="number" class="form-control" name='timeMinutes' [(ngModel)]='newRide.timeMinutes' >
+      <input *ngIf='!bool' type="number" class="form-control" name='timeMinutes' [(ngModel)]='newRide.timeMinutes' >
+      <input *ngIf='bool' type="number" class="form-control" name='timeMinutes' [(ngModel)]='selected.timeMinutes' >
     </div>
 
-    <button (click)="addRide(newRide)" type="submit" class="btn btn-primary">Submit</button>
+    <button *ngIf='bool' (click)='sendUpdate(selected)'  type="submit" class="btn btn-primary">Update</button>
+    <button *ngIf='!bool' (click)="addRide(newRide)" type="submit" class="btn btn-primary">Submit</button>
     <button (click)="loadRides()" type="submit" class="btn btn-danger">Cancel</button>
   </form>
 </div>

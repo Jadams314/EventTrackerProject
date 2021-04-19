@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Ride } from 'src/app/models/ride';
+import { DeletedPipe } from 'src/app/pipes/deleted.pipe';
 import { RideService } from 'src/app/services/ride.service';
 
 @Component({
@@ -12,12 +13,15 @@ export class RideListComponent implements OnInit {
   rides: Ride[] = [];
   selected: Ride = null;
   newRide: Ride = new Ride();
+  editRide: Ride = null;
+  bool: Boolean = false;
 
 
 
 
   constructor(
-    private serv: RideService
+    private serv: RideService,
+    private deleted: DeletedPipe
   ) { }
 
   ngOnInit(): void {
@@ -40,6 +44,7 @@ export class RideListComponent implements OnInit {
   this.selected = ride;
   }
   newRideForm(){
+    this.bool = false;
     this.rides = null;
   }
   addRide(){
@@ -52,5 +57,30 @@ export class RideListComponent implements OnInit {
     );
   }
 
+  destroy(deletedRide : Ride){
+    deletedRide.deleted = true;
+    this.serv.updateRide(deletedRide).subscribe(
+      data => {
+
+        this.selected = data;
+        this.loadRides();
+      },
+      err => console.error('failed to update: ' + err)
+      );
+  }
+  update(updatedRide){
+    this.bool = true;
+    this.rides = null;
+  }
+  sendUpdate(selected){
+    this.serv.updateRide(selected).subscribe(
+      data => {
+
+        this.selected = data;
+        this.loadRides();
+      },
+      err => console.error('failed to update: ' + err)
+      );
+  }
 
 }
